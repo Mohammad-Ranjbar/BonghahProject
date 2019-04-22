@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/app.js">  </script>
+
 
     <title>Bongah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
 </head>
 <body>
 
@@ -40,5 +41,7 @@
 
     </section>
 @include('flash');
+<script src="/js/app.js">  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 </body>
 </html>

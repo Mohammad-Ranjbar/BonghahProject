@@ -10,7 +10,14 @@
     <div class="description">{{$banner->description}}</div>
 
 
+    <form class="dropzone" action="/{{$banner->zip}}/{{$banner->street}}/photos" method="post">
 
+        {{csrf_field()}}
+
+
+
+
+    </form>
 
 
 @stop

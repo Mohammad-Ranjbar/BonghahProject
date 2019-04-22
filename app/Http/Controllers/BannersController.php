@@ -66,7 +66,7 @@ class BannersController extends Controller
     public function show($zip,$street)
     {
       $banner=Banner::locatedAt($zip,$street)->first();
-
+//dd($banner);
       return view('banners.show',compact('banner'));
     }
 
@@ -79,6 +79,21 @@ class BannersController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function addPhotos($zip,$street,Request $request)
+    {
+        $file = $request->file('file');
+
+        $name = time() .$file->getClientOriginalName();
+
+        $file->move('banners/photos',$name);
+
+        $banner=Banner::locatedAt($zip,$street)->first();
+
+        $banner->photos()->create(['path'=>"/banners/photos/{$name}"]);
+
+        return 'Done';
     }
 
     /**

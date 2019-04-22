@@ -13,7 +13,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::resource('banners','BannersController');
+
+
 Route::get('{zip}/{street}', 'BannersController@show');
 
+Route::post('{zip}/{street}/photos', 'BannersController@addPhotos')->name('addPhotos');
 
-Route::resource('banners','BannersController');
+
+
+
