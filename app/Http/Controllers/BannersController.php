@@ -83,7 +83,14 @@ class BannersController extends Controller
 
     public function addPhotos($zip,$street,Request $request)
     {
-        $file = $request->file('file');
+
+        $this->validate($request,[
+
+           'photo'  => 'require|mimes:jpg,png,bmp'
+
+        ]);
+
+        $file = $request->file('photo');
 
         $name = time() .$file->getClientOriginalName();
 

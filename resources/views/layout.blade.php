@@ -42,6 +42,6 @@
     </section>
 @include('flash');
 <script src="/js/app.js">  </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+
 </body>
 </html>
