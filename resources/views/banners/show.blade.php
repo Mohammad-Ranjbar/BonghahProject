@@ -15,13 +15,13 @@
     </div>
     
     <div class="col-md-9">
-        
+
         @foreach($banner->photos as $photo)
 
-            <img src="{{$photo->path}}" alt="">
-            
+            <img src="/{{$photo->path}}" alt="">
+
         @endforeach
-        
+
     </div>
 
     </div>

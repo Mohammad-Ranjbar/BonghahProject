@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banner;
 use App\Http\flash;
 use App\Http\Requests\BannerRequest;
+use App\Photo;
 use Illuminate\Http\Request;
 
 
@@ -65,7 +66,7 @@ class BannersController extends Controller
      */
     public function show($zip,$street)
     {
-      $banner=Banner::locatedAt($zip,$street)->first();
+      $banner=Banner::locatedAt($zip,$street);
 //dd($banner);
       return view('banners.show',compact('banner'));
     }
@@ -86,21 +87,33 @@ class BannersController extends Controller
 
         $this->validate($request,[
 
-           'photo'  => 'require|mimes:jpg,png,bmp'
+           'photo'  => 'required|mimes:jpeg,jpg,png'
 
         ]);
 
-        $file = $request->file('photo');
 
-        $name = time() .$file->getClientOriginalName();
 
-        $file->move('banners/photos',$name);
 
-        $banner=Banner::locatedAt($zip,$street)->first();
+        $photo = Photo::fromForm($request->file('photo'));
 
-        $banner->photos()->create(['path'=>"/banners/photos/{$name}"]);
+        $banner=Banner::locatedAt($zip,$street)->addPhoto($photo);
+
 
         return 'Done';
+
+
+//--------------------Refactoring Code---------------------------------------
+//        $file = $request->file('photo');
+//
+//        $name = time() .$file->getClientOriginalName();
+//
+//        $file->move('banners/photos',$name);
+//
+//        $banner=Banner::locatedAt($zip,$street);
+//
+//        $banner->photos()->create(['path'=>"/banners/photos/{$name}"]);
+//
+//        return 'Done';
     }
 
     /**
