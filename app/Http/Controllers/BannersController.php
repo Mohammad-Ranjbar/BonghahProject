@@ -14,6 +14,13 @@ use Illuminate\Http\Request;
 
 class BannersController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +30,7 @@ class BannersController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,8 +72,16 @@ class BannersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function rootPage()
+    {
+        return view('pages.home');
+    }
+
+
     public function show($zip,$street)
     {
+
+        auth()->logout();
       $banner=Banner::locatedAt($zip,$street);
 //dd($banner);
       return view('banners.show',compact('banner'));

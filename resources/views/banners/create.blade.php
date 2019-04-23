@@ -6,18 +6,18 @@
     <hr>
 
 
-    <div class="row">
+
         <form action="{{route('banners.store')}}"
               method="POST"
               enctype="multipart/form-data"
               role="form"
-                class="col-md-6">
+                >
 
             @include('banners.form')
 
         </form>
 
-    </div>
+
 
     @if(count($errors)>0)
 

@@ -13,9 +13,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
+
+
 Route::resource('banners','BannersController');
 
-
+Route::get('/','BannersController@rootPage');
 Route::get('{zip}/{street}', 'BannersController@show');
 
 Route::post('{zip}/{street}/photos', 'BannersController@addPhotos')->name('addPhotos');
@@ -23,3 +26,12 @@ Route::post('{zip}/{street}/photos', 'BannersController@addPhotos')->name('addPh
 
 
 
+
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

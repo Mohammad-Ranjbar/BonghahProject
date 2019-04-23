@@ -1,5 +1,7 @@
 {!! csrf_field() !!}
 
+<div class="row">
+<div class="col-md-6">
 <div class="form-group">
     <label for="street">Street</label>
     <input type="text" class="form-control" name="street" id="street" value="{{old('street')}}">
@@ -32,8 +34,9 @@
     <label for="state">State</label>
     <input type="text" class="form-control" name="state" id="state" value="{{old('state')}}">
 </div>
-
+</div>
 <hr>
+    <div class="col-md-6">
 <div class="form-group">
     <label for="price">Selling Price</label>
     <input type="text" class="form-control" name="price" id="price" value="{{old('price')}}">
@@ -52,6 +55,15 @@
     {{--<input type="file" class="form-control" name="photos" id="photos" >--}}
 {{--</div>--}}
 
-<div class="form-group">
-    <button type="submit"  class="btn btn-primary">Create Banner</button>
+
+    </div>
+
+
+
+<div class="com-md-12">
+    <hr>
+    <div class="form-group">
+        <button type="submit"  class="btn btn-primary">Create Banner</button>
+    </div>
+</div>
 </div>
