@@ -18,7 +18,7 @@ class Photo extends Model
                             'thumbnail_path'
                             ];
 
-    protected $baseDir  = 'banners/photos';
+    protected $baseDir  = 'images/photos';
 
     public function banner()
     {
