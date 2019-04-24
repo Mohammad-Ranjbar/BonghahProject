@@ -26,7 +26,7 @@
 
     </div>
 
-    @if(auth()->check())
+    {{--@if(auth()->check())--}}
 
     <form class="dropzone" id="addPhotosForm" action="/{{$banner->zip}}/{{$banner->street}}/photos" method="post">
 
@@ -36,7 +36,7 @@
 
 
     </form>
-    @endif
+    {{--@endif--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 
     <script>

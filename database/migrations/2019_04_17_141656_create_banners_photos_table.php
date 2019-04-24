@@ -16,12 +16,17 @@ class CreateBannersPhotosTable extends Migration
         Schema::create('banner_photos', function (Blueprint $table) {
 
             $table->Increments('id');
+            $table->string('path');
+            $table->string('name');
+
+            $table->string('thumbnail_path');
+
 
 
             $table->Integer('banner_id')->unsigned();
 
             $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('path');
+
             $table->timestamps();
 
 

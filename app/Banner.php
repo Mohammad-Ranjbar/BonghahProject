@@ -36,7 +36,7 @@ class Banner extends Model
     }
 
 
-    public static function LocatedAt($zip,$street)
+    public static function locatedAt($zip,$street)
     {
 
         $street =str_replace('-',' ',$street);

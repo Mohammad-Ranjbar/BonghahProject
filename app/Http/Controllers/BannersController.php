@@ -7,9 +7,7 @@ use App\Http\flash;
 use App\Http\Requests\BannerRequest;
 use App\Photo;
 use Illuminate\Http\Request;
-
-
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class BannersController extends Controller
@@ -18,25 +16,16 @@ class BannersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['show']]);
+//        $this->middleware('auth',['except'=>['show']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
 
@@ -46,12 +35,6 @@ class BannersController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(BannerRequest $request)
     {
 
@@ -66,12 +49,7 @@ class BannersController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function rootPage()
     {
         return view('pages.home');
@@ -80,19 +58,13 @@ class BannersController extends Controller
 
     public function show($zip,$street)
     {
-
-        auth()->logout();
       $banner=Banner::locatedAt($zip,$street);
-//dd($banner);
+
       return view('banners.show',compact('banner'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function edit($id)
     {
         //
@@ -101,55 +73,30 @@ class BannersController extends Controller
     public function addPhotos($zip,$street,Request $request)
     {
 
-        $this->validate($request,[
+        $photo = $this->makePhoto($request->file('photo'));
 
-           'photo'  => 'required|mimes:jpeg,jpg,png'
+        Banner::locatedAt($zip,$street)->addPhoto($photo);
 
-        ]);
+        return 'done';
 
-
-
-
-        $photo = Photo::fromForm($request->file('photo'));
-
-        $banner=Banner::locatedAt($zip,$street)->addPhoto($photo);
-
-
-        return 'Done';
-
-
-//--------------------Refactoring Code---------------------------------------
-//        $file = $request->file('photo');
-//
-//        $name = time() .$file->getClientOriginalName();
-//
-//        $file->move('banners/photos',$name);
-//
-//        $banner=Banner::locatedAt($zip,$street);
-//
-//        $banner->photos()->create(['path'=>"/banners/photos/{$name}"]);
-//
-//        return 'Done';
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+    protected function makePhoto(UploadedFile $file)
+    {
+//dd($file);
+        return   Photo::named($file->getClientOriginalName())->move($file);
+//        dd($file);
+
+    }
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

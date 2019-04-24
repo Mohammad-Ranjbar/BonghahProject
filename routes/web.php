@@ -13,13 +13,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+//Auth::routes();
 
+Route::get('{zip}/{street}', 'BannersController@show');
 
 Route::resource('banners','BannersController');
 
 Route::get('/','BannersController@rootPage');
-Route::get('{zip}/{street}', 'BannersController@show');
 
 Route::post('{zip}/{street}/photos', 'BannersController@addPhotos')->name('addPhotos');
 
